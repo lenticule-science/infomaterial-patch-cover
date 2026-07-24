@@ -1,0 +1,28 @@
+{
+  "profile": "org.emsenn.evm.sovereign-enterprise-account.v3",
+  "enterprise": {
+    "nodeId": "infomaterial-patch-cover",
+    "urn": "urn:ame:infomaterial-patch-cover",
+    "enterpriseId": "0x5e05329ed69920388d7e2bf43d8aafce435deba861352a114390a2a7de694178"
+  },
+  "chain": {
+    "chainId": 31337,
+    "caip2": "eip155:31337"
+  },
+  "account": {
+    "address": "0xe354353797950190303a76718cd94d6460477088",
+    "caip10": "eip155:31337:0xe354353797950190303a76718cd94d6460477088"
+  },
+  "factory": {
+    "address": "0x7bf3cf1176c4a037d3ea2a5ff3d480359ac65ecd",
+    "userSalt": "0xde321b505777b7eb29b19e1ed04d79d826d8e131a9b563aca8573fa0528c5c7a"
+  },
+  "policy": {
+    "signer": "0x81bdebdff78fd93a821426715b4da0a777fc08e8",
+    "custody": "settlement-private"
+  },
+  "deployment": {
+    "transaction": "0x31e47e2a221cb7b782a5a0f3928ef5d6a8de8f705993771f5958cf9b9f16ebdc",
+    "block": 1487
+  }
+}

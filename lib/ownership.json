@@ -1,0 +1,8 @@
+{
+  "kind": "ownership-law",
+  "node": "infomaterial-patch-cover",
+  "owners": ["obsmetrological-services-section"],
+  "owns": ["direct plate observation", "gap-free nonoverlapping patch cover proof", "recursive material assembly receipt"],
+  "doesNotOwn": ["child patch interiors", "conductor assay", "conductor descent", "enterprise classification", "global time", "filesystem mutation"]
+}
+

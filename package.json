@@ -1,0 +1,71 @@
+{
+  "name": "@emsenn/infomaterial-patch-cover",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Pure gap-free recursive cover assembly from a shallow plate receipt and independently observed child patches.",
+  "exports": {
+    ".": "./src/directory-cover.mjs",
+    "./client": "./src/client.mjs",
+    "./evidence": "./src/patch-evidence.mjs",
+    "./evidence-client": "./src/evidence-client.mjs",
+    "./receipt": "./src/cover-receipt.mjs"
+  },
+  "bin": {
+    "serve-directory-patch-cover-a2a": "./bin/server.mjs",
+    "solicit-service": "./src/contract-directory-cover.mjs",
+    "invoke-service": "./src/contract-directory-cover.mjs"
+  },
+  "scripts": {
+    "check": "node --check src/directory-cover.mjs && node --check src/cover-receipt.mjs && node --check src/patch-evidence.mjs && node --check src/evidence-client.mjs && node --check src/client.mjs && node --check src/law.mjs && node --check src/contract-directory-cover.mjs && node --check bin/execute-a2a-task.mjs && node --check bin/server.mjs",
+    "test": "node --test test/*.test.mjs",
+    "verify": "npm run check && npm test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@a2a-js/sdk": "1.0.0-beta.0",
+    "@emsenn/a2a-contracted-agent-service": "file:../../../../../red-cup-engineering/services/web-services-section/services/a2a-services-section/services/a2a-contracted-agent-service",
+    "@emsenn/a2a-rmn-part-service": "file:../../../../../red-cup-engineering/services/web-services-section/services/a2a-services-section/services/a2a-rmn-part-service",
+    "@emsenn/a2a-rmn-task-client-service": "file:../../../../../red-cup-engineering/services/web-services-section/services/a2a-services-section/services/a2a-rmn-task-client-service",
+    "@emsenn/infomaterial-directory-plate-observation": "file:../infomaterial-directory-plate-observation",
+    "@emsenn/infomaterial-observation": "file:../infomaterial-observation",
+    "@emsenn/rmn-semantic-conformance": "file:../rmn-semantic-conformance",
+    "@emsenn/rwil-rdf-services": "file:../rwil-rdf-services"
+  },
+  "x-agentic-metro-enterprise": {
+    "node-id": "infomaterial-patch-cover",
+    "actor": "urn:ame:infomaterial-patch-cover",
+    "organizational-kind": "micro-enterprise",
+    "owners": [
+      "obsmetrological-services-section"
+    ],
+    "membrane": {
+      "law": "lib/",
+      "lasting-instances": "content/",
+      "append-only-instances": "data/"
+    },
+    "admission": "ActivityStreams Offer and Accept for one canonical shallow plate receipt and one explicitly bound canonical finite-patch receipt per direct mount",
+    "refusal": "gaps, overlaps, duplicate or unknown mounts, malformed receipts, kind drift, filesystem authority, absent account or RWIL seam, or any interior-read authority",
+    "operation-catalog": {
+      "solicit-service": {
+        "contract": "ni:///sha-256;XZ186zPln2FyA-k-89qx_6j-CwCB67s9i-5rEKd9ONs",
+        "accepts": "ActivityStreams Offer<DirectoryPatchCoverRequest>",
+        "returns": "ActivityStreams Offer<ExecutableServiceOffer>|Reject"
+      },
+      "invoke-service": {
+        "contract": "ni:///sha-256;XZ186zPln2FyA-k-89qx_6j-CwCB67s9i-5rEKd9ONs",
+        "accepts": "ActivityStreams Accept<ServiceContract>",
+        "returns": "ActivityStreams Accept<InfomaterialDirectoryPatchCover>|Reject"
+      },
+      "serve-directory-patch-cover-a2a": {
+        "contract": "ni:///sha-256;XZ186zPln2FyA-k-89qx_6j-CwCB67s9i-5rEKd9ONs",
+        "protocol": "A2A 1.0 via official JavaScript SDK 1.0.0-beta.0 development profile",
+        "accepts": "application/rmn+cbor exact plate and child bindings",
+        "returns": "application/rmn+cbor canonical directory cover",
+        "legacyCompatibility": false
+      }
+    }
+  }
+}

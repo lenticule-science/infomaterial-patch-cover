@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+import { randomUUID } from "node:crypto"; import { readFileSync } from "node:fs"; import { dirname, resolve } from "node:path"; import { fileURLToPath } from "node:url";
+import { Message, Role } from "@a2a-js/sdk"; import { extractRmnPart, rmnPart } from "@emsenn/a2a-rmn-part-service"; import { createSettlementStore } from "@emsenn/rwil-rdf-services/client";
+import { decodeDirectoryCoverTaskRequest } from "../src/client.mjs"; import { assembleDirectoryCover } from "../src/directory-cover.mjs"; import { DIRECTORY_PATCH_COVER_LAW } from "../src/law.mjs";
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), ".."); const message = Message.fromJSON(JSON.parse(readFileSync(0, "utf8")));
+if (message.role !== Role.ROLE_USER) throw new Error("directory cover assembly requires an A2A ROLE_USER message"); if (!process.env.RWIL_RDF_AGENT) throw new Error("RWIL_RDF_AGENT is required");
+const request = decodeDirectoryCoverTaskRequest(extractRmnPart(message.parts).bytes), coveredAt = new Date().toISOString(); const store = createSettlementStore({ settlementRoot: ROOT, dataRoot: resolve(ROOT, "data"), agentUrl: process.env.RWIL_RDF_AGENT });
+const result = await assembleDirectoryCover(request.plateReceipt, request.bindings, { coveredAt }); await store.record({ category: "infomaterial-directory-cover.receipt", recordedAt: coveredAt, record: { ...result.cover, semanticId: result.semanticId, law: DIRECTORY_PATCH_COVER_LAW.id } });
+process.stdout.write(`${JSON.stringify(Message.toJSON({ messageId: randomUUID(), contextId: message.contextId, taskId: message.taskId, role: Role.ROLE_AGENT, parts: [rmnPart(result.canonicalBytes, "directory-cover-receipt.rmn.cbor")], metadata: { disposition: "conformant", receiptNi: result.semanticId, materialRootNi: result.cover.materialRoot }, extensions: [], referenceTaskIds: [] }))}\n`);

@@ -1,0 +1,8 @@
+#lang rmn/v2
+(map
+  ("type" "InfomaterialDirectoryPatchCoverLaw")
+  ("version" 3)
+  ("precondition" "The customer supplies one canonical shallow directory-plate receipt and one explicitly mount-named canonical patch-evidence receipt for every direct mount. Patch evidence is the sum of direct finite observation and recursively composed gap-free directory cover. The assembler has no filesystem capability.")
+  ("operation" "Verify the plate and every direct-or-composed child RMN identity; match each child receipt to exactly one direct mount; require mount kind agreement; compute the placement-neutral directory material root; read no filesystem or child interior.")
+  ("postcondition" "Return one canonical patch-evidence RMN receipt binding the plate observation and every child witness into a gap-free, nonoverlapping, vector-timed recursive material cover that can occupy the same socket in a parent cover.")
+  ("refusal" "Refuse noncanonical or drifting receipts, absent or duplicate bindings, unknown mounts, mount-kind disagreement, any filesystem capability, global-time claims, child-interior access, customer mutation, or the retired path-inferred cover envelope."))
