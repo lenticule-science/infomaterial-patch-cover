@@ -1,6 +1,6 @@
-import { semanticBytes, semanticId } from "@emsenn/rmn-semantic-conformance";
-import { encodeRelationalValue } from "@emsenn/rmn-semantic-conformance/relational-value";
-import { validateDirectoryPlateReceipt } from "@emsenn/infomaterial-directory-plate-observation";
+import { semanticBytes, semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
+import { encodeRelationalValue } from "@red-cup-engineering/rmn-semantic-conformance/relational-value";
+import { validateDirectoryPlateReceipt } from "@lenticule-science/infomaterial-directory-plate-observation";
 import { validateInfomaterialPatchEvidence } from "./patch-evidence.mjs";
 
 export const MATERIAL_PROFILE = "org.emsenn.infomaterial.merkle.v2";

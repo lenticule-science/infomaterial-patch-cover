@@ -1,5 +1,5 @@
 {
-  "name": "@emsenn/infomaterial-patch-cover",
+  "name": "@lenticule-science/infomaterial-patch-cover",
   "version": "3.0.0",
   "private": true,
   "type": "module",
@@ -26,13 +26,13 @@
   },
   "dependencies": {
     "@a2a-js/sdk": "1.0.0-beta.0",
-    "@emsenn/a2a-contracted-agent-service": "file:../../../../../red-cup-engineering/services/web-services-section/services/a2a-services-section/services/a2a-contracted-agent-service",
-    "@emsenn/a2a-rmn-part-service": "file:../../../../../red-cup-engineering/services/web-services-section/services/a2a-services-section/services/a2a-rmn-part-service",
-    "@emsenn/a2a-rmn-task-client-service": "file:../../../../../red-cup-engineering/services/web-services-section/services/a2a-services-section/services/a2a-rmn-task-client-service",
-    "@emsenn/infomaterial-directory-plate-observation": "file:../infomaterial-directory-plate-observation",
-    "@emsenn/infomaterial-observation": "file:../infomaterial-observation",
-    "@emsenn/rmn-semantic-conformance": "file:../../../../../red-cup-engineering/services/model-services-section/services/relational-model-services-section/services/relational-model-notation-services-section/services/rmn-conformance-service",
-    "@emsenn/rwil-rdf-services": "file:../rwil-rdf-services"
+    "@red-cup-engineering/a2a-contracted-agent-service": "2.0.0",
+    "@red-cup-engineering/a2a-rmn-part-service": "1.0.0",
+    "@red-cup-engineering/a2a-rmn-task-client-service": "1.1.0",
+    "@lenticule-science/infomaterial-directory-plate-observation": "2.0.0",
+    "@lenticule-science/infomaterial-observation": "2.0.0",
+    "@red-cup-engineering/rmn-semantic-conformance": "6.0.0",
+    "@lenticule-science/rwil-rdf-projection-service": "1.0.0"
   },
   "x-agentic-metro-enterprise": {
     "node-id": "infomaterial-patch-cover",
@@ -67,5 +67,27 @@
         "legacyCompatibility": false
       }
     }
+  },
+  "x-semiotic-voxel": {
+    "profile": "org.harmonious-union.semiotic-voxel.v1",
+    "owner": "lenticule-science",
+    "kind": "actor",
+    "actor": "urn:ame:infomaterial-patch-cover",
+    "operations": [
+      "invoke-service",
+      "serve-directory-patch-cover-a2a",
+      "solicit-service"
+    ],
+    "capabilities": [
+      {
+        "capability": "infomaterial-patch-cover",
+        "faces": [
+          "invoke-service",
+          "serve-directory-patch-cover-a2a",
+          "solicit-service"
+        ]
+      }
+    ],
+    "package": "@lenticule-science/infomaterial-patch-cover"
   }
 }

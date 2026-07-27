@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { semanticId } from "@emsenn/rmn-semantic-conformance";
-import { encodeRelationalValue } from "@emsenn/rmn-semantic-conformance/relational-value";
-import { createSettlementStore } from "@emsenn/rwil-rdf-services/client";
+import { semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
+import { encodeRelationalValue } from "@red-cup-engineering/rmn-semantic-conformance/relational-value";
+import { createSettlementStore } from "@lenticule-science/rwil-rdf-projection-service/client";
 import { assembleDirectoryCover } from "./directory-cover.mjs";
 import { DIRECTORY_PATCH_COVER_LAW } from "./law.mjs";
 
@@ -35,7 +35,7 @@ async function handle(operation, activity, at) {
   const request = validateRequest(offer.object.request);
   if (offer.object.requestIdentity !== id(request)) throw new Error("request identity changed after offer");
   validateCapability(activity.object?.capability, offer, activity.actor, at);
-  const store = createSettlementStore({ settlementRoot: ROOT, dataRoot: join(ROOT, "data"), agentUrl: process.env.RWIL_RDF_AGENT });
+  const store = createSettlementStore({ settlementRoot: ROOT, agentUrl: process.env.RWIL_RDF_AGENT });
   const result = await assembleDirectoryCover(request.plateReceipt, request.bindings, { coveredAt: at });
   const receipt = { ...result.cover, semanticId: result.semanticId, canonicalBytesBase64: result.canonicalBytes.toString("base64"), provider: ACTOR, law: DIRECTORY_PATCH_COVER_LAW.id, customerMutation: false };
   await store.record({ category: "infomaterial-directory-cover.receipt", recordedAt: at, record: receipt });

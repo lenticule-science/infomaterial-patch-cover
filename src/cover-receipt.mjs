@@ -1,5 +1,5 @@
-import { checkTerm, decodeSemantic, semanticId } from "@emsenn/rmn-semantic-conformance";
-import { decodeRelationalValue } from "@emsenn/rmn-semantic-conformance/relational-value";
+import { checkTerm, decodeSemantic, semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
+import { decodeRelationalValue } from "@red-cup-engineering/rmn-semantic-conformance/relational-value";
 const COVER_PROFILE = "org.emsenn.infomaterial.patch-cover.v2";
 
 const NI = /^ni:\/\/\/sha-256;[A-Za-z0-9_-]{43}$/u;

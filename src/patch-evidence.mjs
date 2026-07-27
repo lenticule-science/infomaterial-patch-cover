@@ -1,4 +1,4 @@
-import { validateInfomaterialObservationReceipt } from "@emsenn/infomaterial-observation/receipt";
+import { validateInfomaterialObservationReceipt } from "@lenticule-science/infomaterial-observation/receipt";
 import { validateDirectoryPatchCoverReceipt } from "./cover-receipt.mjs";
 
 /** The recursive carrier is a genuine sum: a finite patch is evidenced either
