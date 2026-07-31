@@ -2,7 +2,7 @@ import { validateInfomaterialObservationReceipt } from "@lenticule-science/infom
 import { validateDirectoryPatchCoverReceipt } from "./cover-receipt.mjs";
 
 /** The recursive carrier is a genuine sum: a finite patch is evidenced either
- * by direct observation or by a gap-free cover of independently evidenced
+ * by direct observation or by a gap-free cover of exactly attributable and replayable
  * child patches. Both variants carry the same rootKind/materialRoot pins. */
 export function validateInfomaterialPatchEvidence(receipt) {
   if (receipt?.type === "InfomaterialPatchObservation") return validateInfomaterialObservationReceipt(receipt);

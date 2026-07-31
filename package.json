@@ -31,63 +31,7 @@
     "@red-cup-engineering/a2a-rmn-task-client-service": "1.1.0",
     "@lenticule-science/infomaterial-directory-plate-observation": "2.0.0",
     "@lenticule-science/infomaterial-observation": "2.0.0",
-    "@red-cup-engineering/rmn-semantic-conformance": "6.0.0",
+    "@red-cup-engineering/rmn-semantic-conformance": "6.0.1",
     "@lenticule-science/rwil-rdf-projection-service": "1.0.2"
-  },
-  "x-agentic-metro-enterprise": {
-    "node-id": "infomaterial-patch-cover",
-    "actor": "urn:ame:infomaterial-patch-cover",
-    "organizational-kind": "micro-enterprise",
-    "owners": [
-      "obsmetrological-services-section"
-    ],
-    "membrane": {
-      "law": "lib/",
-      "lasting-instances": "content/",
-      "append-only-instances": "data/"
-    },
-    "admission": "ActivityStreams Offer and Accept for one canonical shallow plate receipt and one explicitly bound canonical finite-patch receipt per direct mount",
-    "refusal": "gaps, overlaps, duplicate or unknown mounts, malformed receipts, kind drift, filesystem authority, absent account or RWIL seam, or any interior-read authority",
-    "operation-catalog": {
-      "solicit-service": {
-        "contract": "ni:///sha-256;XZ186zPln2FyA-k-89qx_6j-CwCB67s9i-5rEKd9ONs",
-        "accepts": "ActivityStreams Offer<DirectoryPatchCoverRequest>",
-        "returns": "ActivityStreams Offer<ExecutableServiceOffer>|Reject"
-      },
-      "invoke-service": {
-        "contract": "ni:///sha-256;XZ186zPln2FyA-k-89qx_6j-CwCB67s9i-5rEKd9ONs",
-        "accepts": "ActivityStreams Accept<ServiceContract>",
-        "returns": "ActivityStreams Accept<InfomaterialDirectoryPatchCover>|Reject"
-      },
-      "serve-directory-patch-cover-a2a": {
-        "contract": "ni:///sha-256;XZ186zPln2FyA-k-89qx_6j-CwCB67s9i-5rEKd9ONs",
-        "protocol": "A2A 1.0 via official JavaScript SDK 1.0.0-beta.0 development profile",
-        "accepts": "application/rmn+cbor exact plate and child bindings",
-        "returns": "application/rmn+cbor canonical directory cover",
-        "legacyCompatibility": false
-      }
-    }
-  },
-  "x-semiotic-voxel": {
-    "profile": "org.harmonious-union.semiotic-voxel.v1",
-    "owner": "lenticule-science",
-    "kind": "actor",
-    "actor": "urn:ame:infomaterial-patch-cover",
-    "operations": [
-      "invoke-service",
-      "serve-directory-patch-cover-a2a",
-      "solicit-service"
-    ],
-    "capabilities": [
-      {
-        "capability": "infomaterial-patch-cover",
-        "faces": [
-          "invoke-service",
-          "serve-directory-patch-cover-a2a",
-          "solicit-service"
-        ]
-      }
-    ],
-    "package": "@lenticule-science/infomaterial-patch-cover"
   }
 }
