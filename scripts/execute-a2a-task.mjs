@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { randomUUID } from "node:crypto"; import { readFileSync } from "node:fs"; import { dirname, resolve } from "node:path"; import { fileURLToPath } from "node:url";
-import { Message, Role } from "@a2a-js/sdk"; import { extractRmnPart, rmnPart } from "@red-cup-engineering/a2a-rmn-part-service"; import { createSettlementStore } from "@lenticule-science/rwil-rdf-projection-service/client";
+import { Message, Role } from "@a2a-js/sdk"; import { extractRmnPart, rmnPart } from "@red-cup-engineering/a2a-rmn-part-service"; import { createSettlementStore } from "@lenticule-science/witness-journal-rdf-projection-service/client";
 import { decodeDirectoryCoverTaskRequest } from "../src/client.mjs"; import { assembleDirectoryCover } from "../src/directory-cover.mjs"; import { DIRECTORY_PATCH_COVER_LAW } from "../src/law.mjs";
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), ".."); const message = Message.fromJSON(JSON.parse(readFileSync(0, "utf8")));
 if (message.role !== Role.ROLE_USER) throw new Error("directory cover assembly requires an A2A ROLE_USER message"); if (!process.env.RWIL_RDF_AGENT) throw new Error("RWIL_RDF_AGENT is required");

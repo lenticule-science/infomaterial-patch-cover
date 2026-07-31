@@ -12,12 +12,12 @@
     "./receipt": "./src/cover-receipt.mjs"
   },
   "bin": {
-    "serve-directory-patch-cover-a2a": "./bin/server.mjs",
+    "serve-directory-patch-cover-a2a": "./scripts/server.mjs",
     "solicit-service": "./src/contract-directory-cover.mjs",
     "invoke-service": "./src/contract-directory-cover.mjs"
   },
   "scripts": {
-    "check": "node --check src/directory-cover.mjs && node --check src/cover-receipt.mjs && node --check src/patch-evidence.mjs && node --check src/evidence-client.mjs && node --check src/client.mjs && node --check src/law.mjs && node --check src/contract-directory-cover.mjs && node --check bin/execute-a2a-task.mjs && node --check bin/server.mjs",
+    "check": "node --check src/directory-cover.mjs && node --check src/cover-receipt.mjs && node --check src/patch-evidence.mjs && node --check src/evidence-client.mjs && node --check src/client.mjs && node --check src/law.mjs && node --check src/contract-directory-cover.mjs && node --check scripts/execute-a2a-task.mjs && node --check scripts/server.mjs",
     "test": "node --test test/*.test.mjs",
     "verify": "npm run check && npm test"
   },
@@ -32,6 +32,6 @@
     "@lenticule-science/infomaterial-directory-plate-observation": "2.0.0",
     "@lenticule-science/infomaterial-observation": "2.0.0",
     "@red-cup-engineering/rmn-semantic-conformance": "6.0.1",
-    "@lenticule-science/rwil-rdf-projection-service": "1.0.2"
+    "@lenticule-science/witness-journal-rdf-projection-service": "1.0.2"
   }
 }
