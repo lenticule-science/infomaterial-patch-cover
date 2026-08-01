@@ -5,7 +5,6 @@ import { semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
 import { encodeRelationalValue } from "@red-cup-engineering/rmn-semantic-conformance/relational-value";
 import { createSettlementStore } from "@lenticule-science/witness-journal-rdf-projection-service/client";
 import { assembleDirectoryCover } from "./directory-cover.mjs";
-import { DIRECTORY_PATCH_COVER_LAW } from "./law.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const ACTOR = "urn:ame:infomaterial-patch-cover", CONTEXT = "https://www.w3.org/ns/activitystreams";
@@ -27,17 +26,17 @@ async function handle(operation, activity, at) {
   if (operation === "solicit-service") {
     if (activity?.["@context"] !== CONTEXT || activity.type !== "Offer" || activity.target !== ACTOR || activity.object?.type !== "ServiceSolicitation") throw new Error("ActivityStreams Offer<ServiceSolicitation> targeted to this provider required");
     const request = validateRequest(requestOf(activity));
-    return response("Offer", activity, { type: "ExecutableServiceOffer", law: DIRECTORY_PATCH_COVER_LAW.id, request, requestIdentity: id(request), operation: "invoke-service", effects: ["verify-rmn-receipts", "assemble-directory-cover", "write-provider-witness-journal"], filesystemAccess: false, customerMutation: false }, at);
+    return response("Offer", activity, { type: "ExecutableServiceOffer", request, requestIdentity: id(request), operation: "invoke-service", effects: ["verify-rmn-receipts", "assemble-directory-cover", "write-provider-witness-journal"], filesystemAccess: false, customerMutation: false }, at);
   }
   if (operation !== "invoke-service" || activity?.["@context"] !== CONTEXT || activity.type !== "Accept" || activity.target !== ACTOR) throw new Error("ActivityStreams Accept<ServiceContract> targeted to this provider required");
   const offer = activity.object?.offer;
-  if (offer?.type !== "Offer" || offer.actor !== ACTOR || offer.target !== activity.actor || offer.object?.law !== DIRECTORY_PATCH_COVER_LAW.id) throw new Error("exact provider offer required");
+  if (offer?.type !== "Offer" || offer.actor !== ACTOR || offer.target !== activity.actor) throw new Error("exact provider offer required");
   const request = validateRequest(offer.object.request);
   if (offer.object.requestIdentity !== id(request)) throw new Error("request identity changed after offer");
   validateCapability(activity.object?.capability, offer, activity.actor, at);
   const store = createSettlementStore({ settlementRoot: ROOT, agentUrl: process.env.WITNESS_JOURNAL_RDF_AGENT });
   const result = await assembleDirectoryCover(request.plateReceipt, request.bindings, { coveredAt: at });
-  const receipt = { ...result.cover, semanticId: result.semanticId, canonicalBytesBase64: result.canonicalBytes.toString("base64"), provider: ACTOR, law: DIRECTORY_PATCH_COVER_LAW.id, customerMutation: false };
+  const receipt = { ...result.cover, semanticId: result.semanticId, canonicalBytesBase64: result.canonicalBytes.toString("base64"), provider: ACTOR, customerMutation: false };
   await store.record({ category: "infomaterial-directory-cover.receipt", recordedAt: at, record: receipt });
   return response("Accept", activity, receipt, at);
 }
@@ -47,5 +46,5 @@ const nowIndex = process.argv.indexOf("--now"), at = nowIndex < 0 ? new Date().t
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const activity = await input();
   try { process.stdout.write(`${JSON.stringify(await handle(operation, activity, at), (_, value) => typeof value === "bigint" ? value.toString() : value)}\n`); }
-  catch (error) { process.stdout.write(`${JSON.stringify(response("Reject", activity, { type: "DirectoryPatchCoverRefusal", law: DIRECTORY_PATCH_COVER_LAW.id, reason: error.message, partialSuccessClaimed: false, customerMutation: false }, at))}\n`); process.exitCode = 2; }
+  catch (error) { process.stdout.write(`${JSON.stringify(response("Reject", activity, { type: "DirectoryPatchCoverRefusal", reason: error.message, partialSuccessClaimed: false, customerMutation: false }, at))}\n`); process.exitCode = 2; }
 }
