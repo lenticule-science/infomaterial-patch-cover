@@ -6,10 +6,12 @@
   "description": "Pure gap-free recursive cover assembly from a shallow plate receipt and independently observed child patches.",
   "exports": {
     ".": "./src/directory-cover.mjs",
+    "./directory-cover": "./src/directory-cover.mjs",
     "./client": "./src/client.mjs",
     "./evidence": "./src/patch-evidence.mjs",
     "./evidence-client": "./src/evidence-client.mjs",
-    "./receipt": "./src/cover-receipt.mjs"
+    "./receipt": "./src/cover-receipt.mjs",
+    "./package.json": "./package.json"
   },
   "bin": {
     "serve-directory-patch-cover-a2a": "./scripts/server.mjs",
@@ -31,7 +33,7 @@
     "@red-cup-engineering/a2a-rmn-task-client-service": "1.1.1",
     "@lenticule-science/infomaterial-directory-plate-observation": "2.0.1",
     "@lenticule-science/infomaterial-observation": "2.0.1",
-    "@red-cup-engineering/rmn-semantic-conformance": "6.0.2",
-    "@lenticule-science/witness-journal-rdf-projection-service": "1.0.3"
+    "@red-cup-engineering/relation-model-notation-runtime": "7.0.0",
+    "@red-cup-engineering/witness-journal-rdf-projection-service": "1.1.0"
   }
 }

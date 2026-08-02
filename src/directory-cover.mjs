@@ -1,5 +1,5 @@
-import { semanticBytes, semanticId } from "@red-cup-engineering/rmn-semantic-conformance";
-import { encodeRelationalValue } from "@red-cup-engineering/rmn-semantic-conformance/relational-value";
+import { semanticBytes, semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { encodeRelationalValue } from "@red-cup-engineering/relation-model-notation-runtime/relational-value";
 import { validateDirectoryPlateReceipt } from "@lenticule-science/infomaterial-directory-plate-observation";
 import { validateInfomaterialPatchEvidence } from "./patch-evidence.mjs";
 
