@@ -1,14 +1,15 @@
-import { semanticBytes, semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
+import { semanticBytes } from "@red-cup-engineering/relation-model-notation-runtime";
 import { encodeRelationalValue } from "@red-cup-engineering/relation-model-notation-runtime/relational-value";
 import { validateDirectoryPlateReceipt } from "@lenticule-science/infomaterial-directory-plate-observation";
 import { validateInfomaterialPatchEvidence } from "./patch-evidence.mjs";
+import { jsonId } from "./semantic-identity.mjs";
 
 export const MATERIAL_PROFILE = "org.emsenn.infomaterial.merkle.v2";
 export const COVER_PROFILE = "org.emsenn.infomaterial.patch-cover.v2";
 
-function typed(value) {
+function typed(value, objectKind) {
   const encoded = encodeRelationalValue(value), term = ["ascribe", encoded.type, encoded.term];
-  return { id: semanticId(term), bytes: semanticBytes(term) };
+  return { id: jsonId(term, objectKind), bytes: semanticBytes(term) };
 }
 
 export async function assembleDirectoryCover(plateReceipt, bindings, { coveredAt = new Date().toISOString() } = {}) {
@@ -29,7 +30,7 @@ export async function assembleDirectoryCover(plateReceipt, bindings, { coveredAt
     if (receipt.rootKind !== kind) throw new Error(`child receipt kind does not match mount ${name}`);
     return { name, kind, materialRoot: receipt.materialRoot, observation: receipt.semanticId, observedAt: receipt.observedAt ?? null };
   });
-  const materialRoot = typed({ profile: MATERIAL_PROFILE, kind: "directory", mode: plate.mode, children: mounts.map(({ name, kind, materialRoot: id }) => ({ name, kind, id })) }).id;
+  const materialRoot = typed({ profile: MATERIAL_PROFILE, kind: "directory", mode: plate.mode, children: mounts.map(({ name, kind, materialRoot: id }) => ({ name, kind, id })) }, "lenticule.infomaterial.directory-node").id;
   const cover = {
     type: "InfomaterialDirectoryPatchCover", profile: COVER_PROFILE,
     plateObservation: plateReceipt.semanticId, plateRoot: plate.plateRoot,
@@ -37,6 +38,6 @@ export async function assembleDirectoryCover(plateReceipt, bindings, { coveredAt
     gapFree: true, nonOverlapping: true, vectorTimed: true,
     globalInstantClaimed: false, childInteriorsRead: false, coveredAt,
   };
-  const document = typed(cover);
+  const document = typed(cover, "lenticule.infomaterial.patch-cover-receipt");
   return { cover, semanticId: document.id, canonicalBytes: document.bytes };
 }

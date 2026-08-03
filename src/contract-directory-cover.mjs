@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { semanticId } from "@red-cup-engineering/relation-model-notation-runtime";
 import { encodeRelationalValue } from "@red-cup-engineering/relation-model-notation-runtime/relational-value";
 import { createSettlementStore } from "@red-cup-engineering/witness-journal-rdf-projection-service/client";
 import { assembleDirectoryCover } from "./directory-cover.mjs";
+import { jsonId } from "./semantic-identity.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const ACTOR = "urn:ame:infomaterial-patch-cover", CONTEXT = "https://www.w3.org/ns/activitystreams";
-function id(value) { const encoded = encodeRelationalValue(value); return semanticId(["ascribe", encoded.type, encoded.term]); }
+function id(value) { const encoded = encodeRelationalValue(value); return jsonId(["ascribe", encoded.type, encoded.term], "lenticule.infomaterial.patch-cover-contract-record"); }
 function response(type, source, object, at) { const body = { "@context": CONTEXT, type, actor: ACTOR, target: source?.actor ?? null, inReplyTo: source?.id ?? null, object, published: at }; return { id: id(body), ...body }; }
 function requestOf(activity) { return activity?.object?.request ?? activity?.object?.sourceActivity?.object; }
 function validateRequest(request) {
